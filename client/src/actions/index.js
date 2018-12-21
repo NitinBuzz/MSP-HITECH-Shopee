@@ -12,7 +12,7 @@ export const deleteFromCart = index => ({
 
 export const getProduct = () => ({
   type: "GET_PRODUCT",
-  products: Products.slice(0, 10)
+  products: Products
 });
 
 export const placeOrder = () => ({
