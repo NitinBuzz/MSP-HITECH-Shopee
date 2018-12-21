@@ -22,9 +22,10 @@ class ProductList extends Component {
       // this.props.actions.addToCart(1);
       // this.props.actions.addToCart(2);
       // this.props.actions.addToCart(3);
-      // this.props.actions.addToCart(4);
       // this.props.actions.addToCart(5);
       // this.props.actions.addToCart(6);
+      //
+      // this.props.actions.addToCart(4);
       // this.props.actions.addToCart(7);
       // this.props.actions.addToCart(8);
     }, 1000);
@@ -115,12 +116,15 @@ class ProductList extends Component {
         for (var i = 0; i < cols; i++) {
           packages[i] = [];
         }
-        let counter = 0;
-
-        let sortedCart = this.props.cart.sort((a, b) => {
-          return parseInt(b.weight) - parseInt(a.weight);
-        });
-
+        this.props.cart
+          .sort((a, b) => {
+            return parseInt(b.price) - parseInt(a.price);
+          })
+          .forEach((item, index) => {
+            if (index === 0) {
+              packages[0].push(item);
+            }
+          });
         this.props.cart
           .sort((a, b) => {
             return parseInt(b.weight) - parseInt(a.weight);
@@ -136,16 +140,19 @@ class ProductList extends Component {
                   ) {
                     if (
                       this.totalWeightex(packages[i]) + parseInt(item.weight) <
-                      avgWeight + avgWeight * 0.1
+                      avgWeight + avgWeight * 0.2
                     ) {
-                      packages[i].push(item);
-                      done = true;
-                    }
-                  }
-                } else {
-                  if (!done) {
-                    if (i === possibleSlpits - 1) {
-                      console.log(` big buuuurrrrrrp`);
+                      if (parseInt(item.weight) < 41) {
+                        if (i === possibleSlpits - 1) {
+                          packages[i].push(item);
+                          done = true;
+                        } else {
+                          continue;
+                        }
+                      } else {
+                        packages[i].push(item);
+                        done = true;
+                      }
                     }
                   }
                 }
@@ -285,7 +292,6 @@ class ProductList extends Component {
         }
       });
 
-      console.log(`thisss18 --- ${totalCostM}`);
       return (
         <div>
           <div style={{ marginBottom: "7px" }}>Package 1</div>
