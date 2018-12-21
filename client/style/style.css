@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  text-rendering: optimizeLegibility;
+}
+body {
+  background-color: #1a1a1b;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+
+.header > div {
+  text-align: center;
+}
+.selector {
+  padding-top: 27%;
+  padding-left: 15px;
+}
+.checkout {
+  left: 75%;
+  position: fixed;
+}
+
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  color: #6975ce;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  color: #6975ce;
+  display: inherit;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.multi-package {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.itemsModal {
+  display: flex;
+}
+
+.itemModal {
+  margin: 0;
+}
