@@ -18,15 +18,15 @@ class ProductList extends Component {
   componentDidMount() {
     this.props.actions.getProduct();
     setTimeout(() => {
-      this.props.actions.addToCart(0);
-      this.props.actions.addToCart(1);
-      this.props.actions.addToCart(2);
-      this.props.actions.addToCart(3);
-      this.props.actions.addToCart(4);
-      this.props.actions.addToCart(5);
-      this.props.actions.addToCart(6);
-      this.props.actions.addToCart(7);
-      this.props.actions.addToCart(8);
+      // this.props.actions.addToCart(0);
+      // this.props.actions.addToCart(1);
+      // this.props.actions.addToCart(2);
+      // this.props.actions.addToCart(3);
+      // this.props.actions.addToCart(4);
+      // this.props.actions.addToCart(5);
+      // this.props.actions.addToCart(6);
+      // this.props.actions.addToCart(7);
+      // this.props.actions.addToCart(8);
     }, 1000);
   }
 
