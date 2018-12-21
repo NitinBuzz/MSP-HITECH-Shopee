@@ -94,75 +94,77 @@ class ProductList extends Component {
   };
 
   handlePlaceOrder = () => {
-    let totalCost = 0,
-      totalWeight = 0;
-    this.props.cart.forEach(({ price }) => {
-      totalCost = totalCost + parseInt(price);
-    });
-    if (totalCost > 250) {
-      this.setState({ split: true });
-      //Split the Packages
-      this.props.cart.forEach(({ weight }) => {
-        totalWeight = totalWeight + parseInt(weight);
+    if (this.props.cart && this.props.cart.length) {
+      let totalCost = 0,
+        totalWeight = 0;
+      this.props.cart.forEach(({ price }) => {
+        totalCost = totalCost + parseInt(price);
       });
-      let possibleSlpits = Math.ceil(totalCost / 250);
-      let avgWeight = this.totalWeightex(this.props.cart) / possibleSlpits;
-      let packages = [],
-        cols = possibleSlpits;
+      if (totalCost > 250) {
+        this.setState({ split: true });
+        //Split the Packages
+        this.props.cart.forEach(({ weight }) => {
+          totalWeight = totalWeight + parseInt(weight);
+        });
+        let possibleSlpits = Math.ceil(totalCost / 250);
+        let avgWeight = this.totalWeightex(this.props.cart) / possibleSlpits;
+        let packages = [],
+          cols = possibleSlpits;
 
-      //init the 2d packages
-      for (var i = 0; i < cols; i++) {
-        packages[i] = [];
-      }
-      let counter = 0;
+        //init the 2d packages
+        for (var i = 0; i < cols; i++) {
+          packages[i] = [];
+        }
+        let counter = 0;
 
-      let sortedCart = this.props.cart.sort((a, b) => {
-        return parseInt(b.weight) - parseInt(a.weight);
-      });
-
-      this.props.cart
-        .sort((a, b) => {
+        let sortedCart = this.props.cart.sort((a, b) => {
           return parseInt(b.weight) - parseInt(a.weight);
-        })
-        .forEach((item, index) => {
-          let done = false;
-          if (!done) {
-            for (i = 0; i < possibleSlpits; i++) {
-              if (!done) {
-                if (
-                  this.totalCostex(packages[i]) + parseInt(item.price) <
-                  251
-                ) {
-                  if (
-                    this.totalWeightex(packages[i]) + parseInt(item.weight) <
-                    avgWeight + avgWeight * 0.1
-                  ) {
-                    packages[i].push(item);
-                    done = true;
-                  }
-                }
-              } else {
+        });
+
+        this.props.cart
+          .sort((a, b) => {
+            return parseInt(b.weight) - parseInt(a.weight);
+          })
+          .forEach((item, index) => {
+            let done = false;
+            if (!done) {
+              for (i = 0; i < possibleSlpits; i++) {
                 if (!done) {
-                  if (i === possibleSlpits - 1) {
-                    console.log(` big buuuurrrrrrp`);
+                  if (
+                    this.totalCostex(packages[i]) + parseInt(item.price) <
+                    251
+                  ) {
+                    if (
+                      this.totalWeightex(packages[i]) + parseInt(item.weight) <
+                      avgWeight + avgWeight * 0.1
+                    ) {
+                      packages[i].push(item);
+                      done = true;
+                    }
+                  }
+                } else {
+                  if (!done) {
+                    if (i === possibleSlpits - 1) {
+                      console.log(` big buuuurrrrrrp`);
+                    }
                   }
                 }
               }
             }
-          }
+          });
+        this.setState({ datum: packages }, () => {
+          this.setState({ openModal: true });
         });
-      this.setState({ datum: packages }, () => {
-        this.setState({ openModal: true });
-      });
-    } else {
-      //No Split
-      let packages = [];
-      this.props.cart.forEach((item, index) => {
-        packages.push(item);
-      });
-      this.setState({ datum: packages }, () => {
-        this.setState({ openModal: true });
-      });
+      } else {
+        //No Split
+        let packages = [];
+        this.props.cart.forEach((item, index) => {
+          packages.push(item);
+        });
+        this.setState({ datum: packages }, () => {
+          this.setState({ openModal: true });
+        });
+      }
     }
   };
 
