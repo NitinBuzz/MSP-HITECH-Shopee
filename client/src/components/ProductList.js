@@ -140,7 +140,7 @@ class ProductList extends Component {
                   ) {
                     if (
                       this.totalWeightex(packages[i]) + parseInt(item.weight) <
-                      avgWeight + avgWeight * 0.2
+                      avgWeight + avgWeight * 0.3
                     ) {
                       if (parseInt(item.weight) < 41) {
                         if (i === possibleSlpits - 1) {
@@ -305,8 +305,8 @@ class ProductList extends Component {
               }
             })}
           </div>
-          <div>Total weight - {totalCostM}g</div>
-          <div>Total price - ${totalWeightM}</div>
+          <div>Total weight - {totalWeightM}g</div>
+          <div>Total price - ${totalCostM}</div>
           <div>Courier price - ${courierCostM}</div>
         </div>
       );
